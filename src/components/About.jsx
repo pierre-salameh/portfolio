@@ -1,23 +1,163 @@
+
+import {
+  FiCode,
+  FiDatabase,
+  FiBookOpen,
+  FiLayers,
+  FiServer,
+  FiTarget,
+} from 'react-icons/fi'
+
+import './AboutProfile.css'
+
+const highlights = [
+  {
+    icon: <FiCode />,
+    title: 'Full-Stack Development',
+    description:
+      'Building complete web applications, connecting responsive interfaces with structured backend services.',
+  },
+  {
+    icon: <FiServer />,
+    title: 'Backend Engineering',
+    description:
+      'Developing REST APIs with Laravel, handling authentication and organizing application logic.',
+  },
+  {
+    icon: <FiDatabase />,
+    title: 'Database Design',
+    description:
+      'Working with MySQL and MongoDB, designing structured data models and managing application data.',
+  },
+  {
+    icon: <FiLayers />,
+    title: 'Frontend Architecture',
+    description:
+      'Creating reusable React components, managing application state and building responsive interfaces.',
+  },
+]
+
 function About() {
   return (
-    <section id="about" className="bg-slate-800 text-white py-24">
-      
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="about" className="about-section">
 
-        <h2 className="text-4xl font-bold mb-8 text-center">
-          About Me
-        </h2>
+      <div className="about-container">
 
-        <p className="text-gray-300 text-lg text-center max-w-3xl mx-auto">
-       Full Stack Web Developer with strong experience in React.js and Laravel, building 
-      scalable web applications, dashboards, and automation systems.
-      <br></br>
-      I developed multiple real-world projects including management systems, authentication 
-      platforms, and REST API integrations, focusing on performance and clean architecture.
-      <br></br>
-      Currently working as a React.js Instructor, mentoring developers and guiding them 
-      to build production-ready applications.
-        </p>
+        <div className="section-heading">
+          <span className="section-eyebrow">
+            01 / ABOUT ME
+          </span>
+
+          <h2>
+            Beyond Writing <span>Code.</span>
+          </h2>
+
+          <p>
+            Engineering complete digital experiences,
+            from interface design to backend architecture.
+          </p>
+        </div>
+
+        <div className="about-main-grid">
+
+          <div className="about-story">
+
+            <div className="about-label">
+              <span className="about-label-dot" />
+              MY BACKGROUND
+            </div>
+
+            <h3>
+              A software engineer with a
+              <span> full-stack mindset.</span>
+            </h3>
+
+            <p>
+              I'm Pierre Salameh, a Full-Stack Developer
+              specializing in React.js and Laravel, with a
+              Bachelor's Degree in Information Technology
+              Engineering, specialized in Software Engineering.
+            </p>
+
+            <p>
+              My work focuses on developing responsive web
+              applications, secure REST APIs, role-based
+              dashboards and structured database systems.
+              I enjoy understanding how different parts of
+              an application work together to create reliable
+              and user-focused solutions.
+            </p>
+
+            <p>
+              Alongside development, I have experience teaching
+              programming and React.js, helping students
+              understand technical concepts and apply them
+              through practical projects.
+            </p>
+
+            <div className="about-education">
+
+              <div className="education-icon">
+                <FiBookOpen />
+              </div>
+
+              <div>
+                <span>ACADEMIC BACKGROUND</span>
+                <strong>
+                  Information Technology Engineering
+                </strong>
+                <p>
+                  Software Engineering · University of Kalamoon
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="about-highlights">
+
+            <div className="about-label">
+              <span className="about-label-dot" />
+              WHAT I WORK ON
+            </div>
+
+            <div className="highlight-grid">
+
+              {highlights.map((item, index) => (
+                <article
+                  className="highlight-card"
+                  key={item.title}
+                >
+                  <div className="highlight-card-top">
+                    <span className="highlight-icon">
+                      {item.icon}
+                    </span>
+
+                    <span className="highlight-number">
+                      0{index + 1}
+                    </span>
+                  </div>
+
+                  <h4>{item.title}</h4>
+
+                  <p>{item.description}</p>
+                </article>
+              ))}
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className="about-bottom-line">
+          <FiTarget />
+          <p>
+            My focus: <strong>Clean code. Clear architecture.
+            Meaningful user experiences.</strong>
+          </p>
+        </div>
 
       </div>
 

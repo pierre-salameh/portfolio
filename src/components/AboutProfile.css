@@ -1,0 +1,564 @@
+
+/* =========================================
+   ABOUT + ENGINEERING PROFILE
+========================================= */
+
+.about-section,
+.engineering-section {
+  position: relative;
+  overflow: hidden;
+  padding: 115px 24px;
+  color: #f2f6ff;
+  background: #070e1a;
+}
+
+.engineering-section {
+  background:
+    radial-gradient(
+      ellipse at 85% 15%,
+      rgba(30, 92, 165, .13),
+      transparent 40%
+    ),
+    #050b15;
+}
+
+.about-container {
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* SECTION HEADINGS */
+
+.section-heading {
+  max-width: 690px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.section-eyebrow {
+  color: #62aaff;
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 2px;
+}
+
+.section-heading h2 {
+  margin: 17px 0;
+  color: #f0f5ff;
+  font-size: clamp(34px, 5vw, 51px);
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.section-heading h2 span {
+  color: #65aaff;
+}
+
+.section-heading > p {
+  color: #8da1bc;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* ABOUT MAIN */
+
+.about-main-grid {
+  display: grid;
+  grid-template-columns: .95fr 1.05fr;
+  gap: 65px;
+  align-items: start;
+}
+
+.about-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+  color: #8eabc9;
+  font: 9px 'DM Mono', monospace;
+  letter-spacing: 1.5px;
+}
+
+.about-label-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3996f5;
+  box-shadow: 0 0 12px #3996f5;
+}
+
+.about-story h3 {
+  max-width: 460px;
+  margin: 0 0 24px;
+  color: #edf4ff;
+  font-size: clamp(27px, 3vw, 37px);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -1.2px;
+}
+
+.about-story h3 span {
+  color: #66adff;
+}
+
+.about-story > p {
+  margin: 0 0 17px;
+  color: #93a5bc;
+  font-size: 13px;
+  line-height: 2.1;
+}
+
+.about-education {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-top: 34px;
+  padding: 20px;
+  border: 1px solid rgba(99, 157, 226, .2);
+  border-radius: 7px;
+  background: linear-gradient(
+    110deg,
+    rgba(24, 64, 109, .23),
+    rgba(10, 22, 39, .5)
+  );
+}
+
+.education-icon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(99, 171, 255, .3);
+  border-radius: 6px;
+  color: #74b5ff;
+  background: rgba(45, 113, 188, .13);
+  font-size: 22px;
+}
+
+.about-education span,
+.about-education strong,
+.about-education p {
+  display: block;
+}
+
+.about-education span {
+  margin-bottom: 7px;
+  color: #71a8e7;
+  font: 8px 'DM Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.about-education strong {
+  color: #e1edfc;
+  font-size: 12px;
+}
+
+.about-education p {
+  margin: 6px 0 0;
+  color: #829ab7;
+  font-size: 10px;
+}
+
+/* HIGHLIGHT CARDS */
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.highlight-card {
+  min-height: 190px;
+  padding: 20px;
+  border: 1px solid rgba(112, 157, 212, .13);
+  border-radius: 7px;
+  background: linear-gradient(
+    145deg,
+    rgba(17, 34, 56, .92),
+    rgba(8, 18, 32, .92)
+  );
+  transition: transform .3s, border-color .3s,
+    background .3s;
+}
+
+.highlight-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(78, 151, 238, .45);
+  background: linear-gradient(
+    145deg,
+    rgba(23, 49, 80, .95),
+    rgba(8, 18, 32, .95)
+  );
+}
+
+.highlight-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.highlight-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(82, 157, 245, .26);
+  border-radius: 6px;
+  color: #72b6ff;
+  background: rgba(39, 112, 191, .13);
+  font-size: 19px;
+}
+
+.highlight-number {
+  color: #587493;
+  font: 10px 'DM Mono', monospace;
+}
+
+.highlight-card h4 {
+  margin: 0 0 10px;
+  color: #dceaff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.highlight-card p {
+  margin: 0;
+  color: #8296b0;
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+.about-bottom-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-top: 75px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(115, 157, 211, .14);
+  color: #7e9ab9;
+}
+
+.about-bottom-line svg {
+  color: #69aeff;
+  font-size: 19px;
+  flex-shrink: 0;
+}
+
+.about-bottom-line p {
+  font-size: 12px;
+}
+
+.about-bottom-line strong {
+  color: #c7dfff;
+}
+
+/* =========================================
+   ENGINEERING PROFILE
+========================================= */
+
+.engineering-intro {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 38px;
+}
+
+.engineering-intro-icon {
+  width: 60px;
+  height: 60px;
+  flex: 0 0 60px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(81, 158, 243, .3);
+  border-radius: 8px;
+  color: #71b3ff;
+  background: rgba(30, 91, 156, .18);
+  font-size: 27px;
+}
+
+.engineering-intro > div:last-child > span {
+  color: #72a8e2;
+  font: 9px 'DM Mono', monospace;
+  letter-spacing: 1.4px;
+}
+
+.engineering-intro h3 {
+  margin: 8px 0 0;
+  color: #e6f0ff;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.5;
+  letter-spacing: -.7px;
+}
+
+.engineering-intro h3 span {
+  color: #68aeff;
+}
+
+/* ENGINEERING CARDS */
+
+.engineering-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.engineering-card {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  padding: 23px 19px;
+  border: 1px solid rgba(103, 154, 213, .15);
+  border-radius: 7px;
+  background: rgba(12, 26, 44, .76);
+  transition: .3s ease;
+}
+
+.engineering-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(86, 159, 239, .45);
+  background: rgba(17, 40, 67, .9);
+}
+
+.engineering-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.engineering-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(90, 164, 247, .28);
+  border-radius: 6px;
+  color: #72b6ff;
+  background: rgba(39, 112, 191, .13);
+  font-size: 21px;
+}
+
+.engineering-index {
+  color: #587694;
+  font: 10px 'DM Mono', monospace;
+}
+
+.engineering-card h4 {
+  margin: 0 0 11px;
+  color: #e1edfc;
+  font-size: 13px;
+}
+
+.engineering-card p {
+  margin: 0;
+  color: #879cb7;
+  font-size: 10px;
+  line-height: 1.9;
+}
+
+.engineering-card-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #3c94f5;
+  transition: width .35s;
+}
+
+.engineering-card:hover .engineering-card-line {
+  width: 100%;
+}
+
+/* WORKFLOW PANEL */
+
+.workflow-panel {
+  margin-top: 45px;
+  padding: 30px;
+  border: 1px solid rgba(94, 153, 220, .2);
+  border-radius: 8px;
+  background:
+    radial-gradient(
+      ellipse at 90% 10%,
+      rgba(30, 104, 185, .12),
+      transparent 45%
+    ),
+    #091526;
+}
+
+.workflow-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.workflow-heading h3 {
+  margin: 12px 0 0;
+  color: #dce9fa;
+  font-size: 19px;
+}
+
+.workflow-main-icon {
+  color: #64aaff;
+  font-size: 38px;
+}
+
+.workflow-steps {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 35px;
+}
+
+.workflow-step {
+  position: relative;
+  flex: 1;
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 13px;
+  border: 1px solid rgba(105, 156, 213, .15);
+  border-radius: 5px;
+  background: rgba(5, 13, 24, .55);
+}
+
+.workflow-step-number {
+  color: #67aef7;
+  font: 10px 'DM Mono', monospace;
+}
+
+.workflow-step-title {
+  color: #b4c6dd;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.workflow-arrow {
+  position: absolute;
+  top: 50%;
+  right: -17px;
+  z-index: 2;
+  color: #5c9cde;
+  font-size: 15px;
+  transform: translateY(-50%);
+}
+
+.workflow-note {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(105, 156, 213, .13);
+  color: #819bb8;
+  font-size: 10px;
+}
+
+.workflow-note svg {
+  color: #64b5a0;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 950px) {
+  .about-main-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .engineering-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .workflow-steps {
+    flex-wrap: wrap;
+  }
+
+  .workflow-step {
+    flex: 1 1 28%;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-section,
+  .engineering-section {
+    padding: 85px 20px;
+  }
+
+  .section-heading {
+    margin-bottom: 45px;
+  }
+
+  .section-heading h2 {
+    letter-spacing: -1.3px;
+  }
+
+  .about-story h3 {
+    font-size: 29px;
+  }
+
+  .highlight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-card {
+    min-height: auto;
+  }
+
+  .engineering-intro {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .engineering-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .engineering-card {
+    min-height: 180px;
+  }
+
+  .workflow-panel {
+    padding: 20px 15px;
+  }
+
+  .workflow-heading h3 {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .workflow-steps {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workflow-step {
+    min-height: 70px;
+    flex: auto;
+  }
+
+  .workflow-arrow {
+    top: auto;
+    right: 50%;
+    bottom: -17px;
+    transform: translateX(50%) rotate(90deg);
+  }
+
+  .about-bottom-line {
+    align-items: flex-start;
+    margin-top: 45px;
+  }
+
+  .about-bottom-line p {
+    line-height: 1.8;
+  }
+}

@@ -1,32 +1,74 @@
+
+import { useState } from 'react'
+import {
+  FiArrowUpRight,
+  FiMenu,
+  FiX,
+} from 'react-icons/fi'
+
+const links = [
+  ['Home', 'home'],
+  ['About', 'about'],
+  ['Engineering', 'engineering'],
+  ['Projects', 'projects'],
+  ['Experience', 'experience'],
+  ['Tech Stack', 'skills'],
+  ['Contact', 'contact'],
+]
+
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const closeMenu = () => setMenuOpen(false)
+
   return (
-    <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 hover:text-yellow-400 transition">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+    <header className="site-header">
+      <nav className="nav-container" aria-label="Main navigation">
 
-        <h1 className="text-white font-bold text-xl">
-          Pierre Salameh
-        </h1>
+        <a
+          href="#home"
+          className="nav-brand"
+          onClick={closeMenu}
+        >
+          <span className="brand-symbol">
+            P<span>S</span>
+          </span>
 
-        <ul className="flex space-x-6 text-gray-300">
-          <li>
-            <a href="#home" className="hover:text-yellow-400">Home</a>
-          </li>
+          <span className="brand-name">
+            PIERRE <b>SALAMEH</b>
+          </span>
+        </a>
 
-          <li>
-            <a href="#about" className="hover:text-yellow-400">About</a>
-          </li>
+        <div
+          id="primary-navigation"
+          className={`nav-links ${menuOpen ? 'is-open' : ''}`}
+        >
+          {links.map(([label, id]) => (
+            <a
+              key={id}
+              href={`#${id}`}
+              onClick={closeMenu}
+            >
+              {label}
+            </a>
+          ))}
 
-          <li>
-            <a href="#projects" className="hover:text-yellow-400">Projects</a>
-          </li>
+         
+        </div>
 
-          <li>
-            <a href="#contact" className="hover:text-yellow-400">Contact</a>
-          </li>
-        </ul>
+        <button
+          type="button"
+          className="nav-menu-toggle"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+        >
+          {menuOpen ? <FiX /> : <FiMenu />}
+        </button>
 
-      </div>
-    </nav>
+      </nav>
+    </header>
   )
 }
 
