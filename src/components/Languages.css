@@ -1,104 +1,266 @@
-.lng {
-  padding: 110px 0;
-  color: #eef3fb;
+.lang-section {
+  position: relative;
+  padding: 110px 7%;
+  background:
+    radial-gradient(ellipse at 15% 45%, rgba(20, 80, 160, 0.09), transparent 42%),
+    #080d18;
+  overflow: hidden;
 }
-.lng__wrap {
-  max-width: 1000px;
+
+.lang-container {
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
 }
-.lng__eyebrow {
-  font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  font-size: 12px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: #60a5fa;
-  margin: 0 0 16px;
+
+.lang-heading {
+  max-width: 650px;
+  margin-bottom: 48px;
 }
-.lng__title {
-  font-size: clamp(34px, 5vw, 54px);
+
+.lang-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #61a5ff;
+  font-size: 11px;
   font-weight: 700;
-  line-height: 1.1;
-  margin: 0 0 16px;
+  letter-spacing: 2.5px;
+  margin-bottom: 19px;
 }
-.lng__title span {
-  color: #60a5fa;
+
+.lang-eyebrow-line {
+  width: 30px;
+  height: 1px;
+  background: #398cff;
 }
-.lng__sub {
-  color: #a9b8cf;
-  max-width: 520px;
-  margin: 0 auto 48px;
-  font-size: 16px;
-  line-height: 1.7;
+
+.lang-heading h2 {
+  color: #f4f7ff;
+  font-size: clamp(34px, 5vw, 49px);
+  line-height: 1.15;
+  margin: 0 0 17px;
+  letter-spacing: -1.7px;
 }
-.lng__grid {
+
+.lang-heading h2 span {
+  color: #5b9fff;
+}
+
+.lang-heading p {
+  max-width: 540px;
+  color: #929db1;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.lang-dashboard {
+  background: linear-gradient(145deg, #101a2b, #0b1220 75%);
+  border: 1px solid rgba(111, 157, 219, 0.17);
+  border-radius: 17px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.24);
+}
+
+.lang-dashboard-top {
+  min-height: 65px;
+  padding: 0 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(130, 160, 205, 0.12);
+}
+
+.lang-label,
+.lang-count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #aab8ce;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.lang-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #43d6a0;
+  box-shadow: 0 0 12px rgba(67, 214, 160, 0.65);
+}
+
+.lang-count {
+  color: #71829c;
+  font-size: 11px;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+.lang-count svg {
+  font-size: 15px;
+  color: #5d9fff;
+}
+
+.lang-content {
+  padding: 30px 27px 34px;
+}
+
+.lang-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  text-align: left;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
 }
-.lng__card {
-  background: linear-gradient(160deg, #0c172b, #08101f);
-  border: 1px solid rgba(96, 165, 250, 0.16);
-  border-radius: 16px;
-  padding: 26px;
-  transition: border-color 0.25s, transform 0.25s;
+
+.lang-card {
+  min-height: 135px;
+  padding: 15px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(122, 155, 202, 0.13);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  transition: transform 0.25s ease, border-color 0.25s ease,
+    background 0.25s ease;
+  animation: langEnter 0.35s ease both;
 }
-.lng__card:hover {
-  border-color: rgba(96, 165, 250, 0.5);
-  transform: translateY(-3px);
+
+.lang-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(76, 148, 255, 0.5);
+  background: rgba(49, 119, 218, 0.08);
 }
-.lng__top {
+
+.lang-card.featured {
+  border-color: rgba(76, 148, 255, 0.29);
+  background: linear-gradient(
+    145deg,
+    rgba(49, 119, 218, 0.12),
+    rgba(255, 255, 255, 0.025)
+  );
+}
+
+.lang-card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 22px;
 }
-.lng__icon {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border-radius: 10px;
-  color: #60a5fa;
-  background: rgba(96, 165, 250, 0.1);
-  border: 1px solid rgba(96, 165, 250, 0.22);
+
+.lang-card-index {
+  color: #526a8b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
-.lng__num {
-  font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-  font-size: 12px;
-  color: #6b7f9e;
+
+.lang-card-icon {
+  color: #5277a5;
+  font-size: 15px;
+  transition: 0.25s ease;
 }
-.lng__card h3 {
-  margin: 0 0 6px;
-  font-size: 21px;
+
+.lang-card:hover .lang-card-icon {
+  color: #77b5ff;
+}
+
+.lang-card h4 {
+  color: #e5edf9;
+  font-size: 18px;
   font-weight: 600;
+  margin: 14px 0;
+  letter-spacing: 0.1px;
 }
-.lng__level {
-  display: block;
-  font-size: 13.5px;
-  color: #60a5fa;
-  margin-bottom: 18px;
+
+.lang-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
-.lng__bar {
+
+.lang-bar {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
+  gap: 5px;
 }
-.lng__bar i {
-  height: 6px;
+
+.lang-bar i {
+  height: 5px;
   border-radius: 4px;
   background: rgba(96, 165, 250, 0.14);
 }
-.lng__bar i.on {
-  background: #60a5fa;
+
+.lang-bar i.on {
+  background: #5b9fff;
 }
-@media (max-width: 760px) {
-  .lng {
-    padding: 80px 0;
+
+.lang-level {
+  color: #75b4ff;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.lang-footer {
+  min-height: 48px;
+  padding: 0 27px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(130, 160, 205, 0.12);
+  color: #62738c;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+.lang-footer-code {
+  color: #5c9df2;
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+@keyframes langEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
   }
-  .lng__grid {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .lang-section {
+    padding: 90px 5%;
+  }
+}
+
+@media (max-width: 600px) {
+  .lang-section {
+    padding: 75px 5%;
+  }
+
+  .lang-heading {
+    margin-bottom: 32px;
+  }
+
+  .lang-dashboard-top {
+    padding: 0 16px;
+  }
+
+  .lang-content {
+    padding: 24px 15px;
+  }
+
+  .lang-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .lang-footer {
+    padding: 0 15px;
+    font-size: 8px;
   }
 }
