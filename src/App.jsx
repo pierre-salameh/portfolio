@@ -9,6 +9,7 @@ import ScrollTop from './components/ScrollTop'
 import TechnicalSkills from "./components/TechnicalSkills";
 import Courses from "./components/Courses";
 import Languages from "./components/Languages";
+import RequestJourney from "./components/RequestJourney";
 
 import './App.css'
 
@@ -21,6 +22,7 @@ function App() {
         <Home />
         <Experience />
         <Projects />
+        <RequestJourney />
         <About />
         <TechnicalSkills />
         <Courses />
