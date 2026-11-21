@@ -161,7 +161,7 @@ function Home() {
 
               <div className="portrait-footer">
                 <div>
-                  <strong>PIERRE SALAMEH</strong>
+                  <strong className="footer-brand-mark notranslate" translate="no">PIERRE SALAMEH</strong>
                   <span>React.js · Laravel · MySQL</span>
                 </div>
 
