@@ -3,13 +3,11 @@ import {
   FiCalendar,
   FiMapPin,
   FiUsers,
-  FiBookOpen,
   FiMonitor,
   FiCode,
   FiArrowUpRight,
   FiCheckCircle,
   FiClock,
-  FiGlobe,
   FiAward,
 } from 'react-icons/fi'
 
@@ -148,20 +146,20 @@ function Experience() {
           <div className="experience-overview-divider" />
 
           <div className="experience-overview-item">
-            <FiGlobe />
+            <FiClock />
             <div>
-              <strong>02</strong>
-              <span>WORK ENVIRONMENTS</span>
+              <strong>130+</strong>
+              <span>TRAINING HOURS</span>
             </div>
           </div>
 
           <div className="experience-overview-divider" />
 
           <div className="experience-overview-item">
-            <FiBookOpen />
+            <FiUsers />
             <div>
-              <strong>01</strong>
-              <span>TECHNICAL TEACHING FIELD</span>
+              <strong>06</strong>
+              <span>STUDENTS MENTORED</span>
             </div>
           </div>
 
@@ -319,8 +317,6 @@ function Experience() {
               with technical education and continuous learning.
             </p>
           </div>
-
-          
 
         </div>
 
