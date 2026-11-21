@@ -1,4 +1,3 @@
-
 import { useMemo, useState } from "react";
 import {
   FiCode,
@@ -168,7 +167,9 @@ function TechnicalSkills() {
                     <FiArrowUpRight className="skill-card-arrow" />
                   </div>
 
-                  <h4>{skill.name}</h4>
+                  <h4 className="notranslate" translate="no">
+                    {skill.name}
+                  </h4>
 
                   <div className="skill-card-bottom">
                     <span>{categoryNames[skill.category]}</span>
@@ -184,7 +185,9 @@ function TechnicalSkills() {
 
           <div className="skills-dashboard-footer">
             <span>BUILT WITH CONTINUOUS LEARNING</span>
-            <span className="footer-code">{"<developer />"}</span>
+            <span className="footer-code notranslate" translate="no">
+              {"<developer />"}
+            </span>
           </div>
         </div>
 
