@@ -161,13 +161,13 @@ function Home() {
 
               <div className="portrait-footer">
                 <div>
-                  <strong className="footer-brand-mark notranslate" translate="no">PIERRE SALAMEH</strong>
+                  <strong>PIERRE SALAMEH</strong>
                   <span>React.js · Laravel · MySQL</span>
                 </div>
 
-                <div className="portrait-logo">
-                  PS.
-                </div>
+                <div className="portrait-logo notranslate" translate="no">
+                  PS
+               </div>
               </div>
 
             </div>
