@@ -19,8 +19,8 @@ function App() {
 
       <main>
         <Home />
-        <Projects />
         <Experience />
+        <Projects />
         <About />
         <TechnicalSkills />
         <Courses />
