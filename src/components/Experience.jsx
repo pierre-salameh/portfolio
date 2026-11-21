@@ -320,7 +320,7 @@ function Experience() {
             </p>
           </div>
 
-          <FiArrowUpRight className="experience-footer-arrow" />
+          
 
         </div>
 
