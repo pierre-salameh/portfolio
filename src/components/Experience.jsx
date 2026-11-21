@@ -1,4 +1,3 @@
-
 import {
   FiBriefcase,
   FiCalendar,
@@ -11,6 +10,7 @@ import {
   FiCheckCircle,
   FiClock,
   FiGlobe,
+  FiAward,
 } from 'react-icons/fi'
 
 import './Experience.css'
@@ -56,6 +56,9 @@ const experiences = [
     type: 'PART-TIME',
     icon: <FiCode />,
     accent: 'cyan',
+
+    certificate:
+      'https://drive.google.com/file/d/1q4bKhk_uaMuCDp57b2UqpihraEXNCwMI/view?usp=drive_link',
 
     description:
       'Delivered hands-on React.js training focused on modern frontend development concepts, while mentoring students through practical application development and graduation projects.',
@@ -256,6 +259,21 @@ function Experience() {
                   ))}
 
                 </div>
+
+                {/* CERTIFICATE */}
+
+                {experience.certificate && (
+                  <a
+                    className="experience-certificate"
+                    href={experience.certificate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FiAward />
+                    <span>Experience Certificate</span>
+                    <FiArrowUpRight />
+                  </a>
+                )}
 
                 {/* METRICS */}
 

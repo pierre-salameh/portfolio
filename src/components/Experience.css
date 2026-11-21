@@ -362,6 +362,40 @@
   color: #aa9aff;
 }
 
+
+
+.experience-certificate {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 4px 0 22px;
+  padding: 10px 15px;
+  border: 1px solid rgba(76, 148, 255, 0.35);
+  border-radius: 8px;
+  background: rgba(49, 119, 218, 0.1);
+  color: #cfe3ff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.25s ease;
+}
+
+.experience-certificate svg {
+  font-size: 15px;
+  color: #6aabff;
+}
+
+.experience-certificate:hover {
+  border-color: rgba(91, 159, 255, 0.7);
+  background: rgba(49, 119, 218, 0.2);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.experience-certificate:hover svg:last-child {
+  transform: translate(2px, -2px);
+}
+
 /* FOOTER */
 
 .experience-footer {
