@@ -45,7 +45,7 @@ function About() {
 
         <div className="section-heading">
           <span className="section-eyebrow">
-            01 / ABOUT ME
+            03 / ABOUT ME
           </span>
 
           <h2>

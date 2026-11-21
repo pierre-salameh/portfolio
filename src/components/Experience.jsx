@@ -137,7 +137,7 @@ function Experience() {
           <div className="experience-overview-item">
             <FiBriefcase />
             <div>
-              <strong>03</strong>
+              <strong>02</strong>
               <span>PROFESSIONAL ROLES</span>
             </div>
           </div>

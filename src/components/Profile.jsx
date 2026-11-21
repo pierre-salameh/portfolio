@@ -54,7 +54,7 @@ function Profile() {
 
         <div className="section-heading">
           <span className="section-eyebrow">
-            02 / ENGINEERING MINDSET
+            04 / ENGINEERING MINDSET
           </span>
 
           <h2>

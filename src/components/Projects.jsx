@@ -265,7 +265,7 @@ function Projects() {
 
         <div className="section-heading">
           <span className="section-eyebrow">
-            03 / SELECTED WORK
+            01 / SELECTED WORK
           </span>
 
           <h2>
