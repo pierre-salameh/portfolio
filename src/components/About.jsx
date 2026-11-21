@@ -1,4 +1,3 @@
-
 import {
   FiCode,
   FiDatabase,
@@ -104,10 +103,14 @@ function About() {
               <div>
                 <span>ACADEMIC BACKGROUND</span>
                 <strong>
-                  Information Technology Engineering
+                  Bachelor's Degree in Information Technology
+                  Engineering – Software Engineering
                 </strong>
                 <p>
-                  Software Engineering · University of Kalamoon
+                  University of Kalamoon · Damascus Suburb, Syria
+                </p>
+                <p className="education-period">
+                  February 2020 – June 2025
                 </p>
               </div>
 
