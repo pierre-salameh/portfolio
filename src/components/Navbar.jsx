@@ -8,8 +8,8 @@ import {
 
 const links = [
   ['Home', 'home'],
-  ['Projects', 'projects'],
   ['Experience', 'experience'],
+  ['Projects', 'projects'],
   ['About', 'about'],
   ['Engineering', 'engineering'],
   ['Tech Stack', 'skills'],
