@@ -115,7 +115,7 @@ function Experience() {
         <div className="section-heading">
 
           <span className="section-eyebrow">
-            04 / PROFESSIONAL JOURNEY
+            02 / PROFESSIONAL JOURNEY
           </span>
 
           <h2>
@@ -137,7 +137,7 @@ function Experience() {
           <div className="experience-overview-item">
             <FiBriefcase />
             <div>
-              <strong>02</strong>
+              <strong>03</strong>
               <span>PROFESSIONAL ROLES</span>
             </div>
           </div>
