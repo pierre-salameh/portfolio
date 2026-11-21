@@ -160,7 +160,7 @@ function Contact() {
       <footer className="site-footer">
         <div className="footer-container">
           <a href="#home" className="footer-brand">
-            <span className="footer-brand-mark">PS</span>
+            <span className="footer-brand-mark notranslate" translate="no">PS</span>
             <span>PIERRE SALAMEH</span>
           </a>
 

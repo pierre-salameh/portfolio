@@ -1,0 +1,31 @@
+.site-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px;
+  border: 1px solid rgba(76, 148, 255, 0.35);
+  border-radius: 8px;
+  background: rgba(49, 119, 218, 0.1);
+  color: #cfe3ff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.site-lang-toggle svg {
+  font-size: 15px;
+  color: #6aabff;
+}
+
+.site-lang-toggle:hover {
+  border-color: rgba(91, 159, 255, 0.7);
+  background: rgba(49, 119, 218, 0.2);
+  color: #ffffff;
+}
+
+.site-lang-toggle:focus-visible {
+  outline: 2px solid #5b9fff;
+  outline-offset: 2px;
+}

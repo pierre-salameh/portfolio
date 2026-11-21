@@ -1,10 +1,9 @@
-
 import { useState } from 'react'
 import {
-  FiArrowUpRight,
   FiMenu,
   FiX,
 } from 'react-icons/fi'
+import LanguageToggle from './LanguageToggle'
 
 const links = [
   ['Home', 'home'],
@@ -28,7 +27,8 @@ function Navbar() {
 
         <a
           href="#home"
-          className="nav-brand"
+          className="nav-brand notranslate"
+          translate="no"
           onClick={closeMenu}
         >
           <span className="brand-symbol">
@@ -54,7 +54,7 @@ function Navbar() {
             </a>
           ))}
 
-         
+          <LanguageToggle />
         </div>
 
         <button
