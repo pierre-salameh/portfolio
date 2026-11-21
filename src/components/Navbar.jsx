@@ -11,7 +11,6 @@ const links = [
   ['Experience', 'experience'],
   ['Projects', 'projects'],
   ['About', 'about'],
-  ['Engineering', 'engineering'],
   ['Tech Stack', 'skills'],
   ['Courses', 'courses'],
   ['Languages', 'languages'],
