@@ -29,7 +29,7 @@ const projects = [
     image: '/20.png',
     imageAlt: 'Technology Café application interface',
 
-    stack: ['React.js', 'Laravel 11', 'MySQL', 'Sanctum', 'Axios'],
+    stack: ['React.js', 'Laravel', 'MySQL', 'Sanctum', 'Axios'],
 
     github:
       'https://github.com/pierre-salameh/Technology-Cafee',
