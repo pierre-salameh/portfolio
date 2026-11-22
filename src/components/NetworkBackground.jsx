@@ -7,10 +7,19 @@ const CONFIG = {
   areaPerParticle: 13000, // مساحة الشاشة لكل نقطة
   linkDistance: 145,      // أقصى مسافة لرسم خط بين نقطتين
   baseSpeed: 0.35,        // سرعة النقاط الهادئة
-  mouseRadius: 170,       // نصف قطر تأثير الماوس
-  mouseLinkAlpha: 0.55,   // سطوع الخطوط بين الماوس والنقاط
-  mousePush: 0.04,        // دفع النقاط بعيداً عن الماوس (0 = بدون دفع)
-  mouseGlow: 0.1,         // سطوع الهالة حول الماوس (0 = بدون هالة)
+
+  // الماوس (الكمبيوتر)
+  mouseRadius: 170,
+  mouseLinkAlpha: 0.55,
+  mousePush: 0.04,        // 0 = بدون دفع
+  mouseGlow: 0.1,         // 0 = بدون هالة
+
+  // اللمس (الموبايل)
+  touchRadius: 150,
+  touchLinkAlpha: 0.65,
+  touchPush: 0.05,
+  touchGlow: 0.18,        // أقوى لأن الإصبع يغطي جزءاً من الضوء
+  touchDelay: 60,         // مللي ثانية قبل ظهور الضوء (يتجنب وميضاً عند بدء التمرير)
 }
 
 function NetworkBackground() {
@@ -29,7 +38,16 @@ function NetworkBackground() {
     let running = false
     let inView = true
 
-    const mouse = { x: 0, y: 0, active: false }
+    // حالة المؤشر (ماوس أو إصبع)
+    const pointer = {
+      x: 0,
+      y: 0,
+      type: 'mouse',   // 'mouse' | 'touch'
+      target: 0,       // 1 = الضوء مطلوب، 0 = مخفي
+      strength: 0,     // قوة الضوء الحالية (تتغير بسلاسة)
+      pending: false,  // لمسة بدأت وننتظر مرور touchDelay
+      pendingSince: 0,
+    }
 
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
@@ -63,40 +81,70 @@ function NetworkBackground() {
     const draw = () => {
       context.clearRect(0, 0, width, height)
 
-      const linkSq = CONFIG.linkDistance * CONFIG.linkDistance
-      const mouseSq = CONFIG.mouseRadius * CONFIG.mouseRadius
-      const useMouse = mouse.active && !reduceMotion
+      // بدء الضوء بعد تأخير قصير من اللمس
+      if (
+        pointer.pending &&
+        performance.now() - pointer.pendingSince >= CONFIG.touchDelay
+      ) {
+        pointer.pending = false
+        pointer.target = 1
+      }
 
-      // هالة خفيفة حول المؤشر
-      if (useMouse && CONFIG.mouseGlow > 0) {
+      // تغيير قوة الضوء بسلاسة (ظهور أسرع، اختفاء أبطأ)
+      const fade = pointer.target > pointer.strength ? 0.18 : 0.07
+      pointer.strength += (pointer.target - pointer.strength) * fade
+      if (pointer.target === 0 && pointer.strength < 0.005) {
+        pointer.strength = 0
+      }
+
+      const isTouch = pointer.type === 'touch'
+      const radius = isTouch ? CONFIG.touchRadius : CONFIG.mouseRadius
+      const radiusSq = radius * radius
+      const linkAlpha =
+        (isTouch ? CONFIG.touchLinkAlpha : CONFIG.mouseLinkAlpha) *
+        pointer.strength
+      const push =
+        (isTouch ? CONFIG.touchPush : CONFIG.mousePush) * pointer.strength
+      const glowAlpha =
+        (isTouch ? CONFIG.touchGlow : CONFIG.mouseGlow) * pointer.strength
+
+      const linkSq = CONFIG.linkDistance * CONFIG.linkDistance
+      const useMouse = pointer.strength > 0.01 && !reduceMotion
+
+      // هالة حول المؤشر أو الإصبع
+      if (useMouse && glowAlpha > 0) {
         const glow = context.createRadialGradient(
-          mouse.x,
-          mouse.y,
+          pointer.x,
+          pointer.y,
           0,
-          mouse.x,
-          mouse.y,
-          CONFIG.mouseRadius
+          pointer.x,
+          pointer.y,
+          radius
         )
-        glow.addColorStop(0, `rgba(70, 140, 255, ${CONFIG.mouseGlow})`)
+        glow.addColorStop(0, `rgba(70, 140, 255, ${glowAlpha})`)
         glow.addColorStop(1, 'rgba(70, 140, 255, 0)')
         context.fillStyle = glow
-        context.fillRect(0, 0, width, height)
+        context.fillRect(
+          pointer.x - radius,
+          pointer.y - radius,
+          radius * 2,
+          radius * 2
+        )
       }
 
       for (let index = 0; index < particles.length; index++) {
         const particle = particles[index]
 
         if (!reduceMotion) {
-          // دفع خفيف بعيداً عن الماوس
-          if (useMouse && CONFIG.mousePush > 0) {
-            const dx = particle.x - mouse.x
-            const dy = particle.y - mouse.y
+          // دفع خفيف بعيداً عن المؤشر
+          if (useMouse && push > 0) {
+            const dx = particle.x - pointer.x
+            const dy = particle.y - pointer.y
             const distSq = dx * dx + dy * dy
 
-            if (distSq < mouseSq && distSq > 0.01) {
+            if (distSq < radiusSq && distSq > 0.01) {
               const dist = Math.sqrt(distSq)
-              const force =
-                (1 - dist / CONFIG.mouseRadius) * CONFIG.mousePush
+              const force = (1 - dist / radius) * push
 
               particle.vx += (dx / dist) * force
               particle.vy += (dy / dist) * force
@@ -143,20 +191,18 @@ function NetworkBackground() {
         context.fillStyle = 'rgba(90, 160, 255, 0.85)'
         context.fill()
 
-        // خط بين النقطة والماوس
+        // خط بين النقطة والمؤشر
         if (useMouse) {
-          const dx = particle.x - mouse.x
-          const dy = particle.y - mouse.y
+          const dx = particle.x - pointer.x
+          const dy = particle.y - pointer.y
           const distSq = dx * dx + dy * dy
 
-          if (distSq < mouseSq) {
-            const alpha =
-              CONFIG.mouseLinkAlpha *
-              (1 - Math.sqrt(distSq) / CONFIG.mouseRadius)
+          if (distSq < radiusSq) {
+            const alpha = linkAlpha * (1 - Math.sqrt(distSq) / radius)
 
             context.beginPath()
             context.moveTo(particle.x, particle.y)
-            context.lineTo(mouse.x, mouse.y)
+            context.lineTo(pointer.x, pointer.y)
             context.strokeStyle = `rgba(120, 180, 255, ${alpha})`
             context.lineWidth = 0.9
             context.stroke()
@@ -234,20 +280,80 @@ function NetworkBackground() {
       cancelAnimationFrame(animationFrame)
     }
 
-    const onPointerMove = (event) => {
-      if (event.pointerType === 'touch') return
-
+    // تحويل موضع الحدث إلى إحداثيات الكانفاس
+    const toLocal = (event) => {
       const bounds = canvas.getBoundingClientRect()
       const x = event.clientX - bounds.left
       const y = event.clientY - bounds.top
 
-      mouse.x = x
-      mouse.y = y
-      mouse.active = x >= 0 && x <= bounds.width && y >= 0 && y <= bounds.height
+      return {
+        x,
+        y,
+        inside: x >= 0 && x <= bounds.width && y >= 0 && y <= bounds.height,
+      }
+    }
+
+    // ───── اللمس ─────
+    const onPointerDown = (event) => {
+      if (event.pointerType !== 'touch' || !event.isPrimary) return
+
+      const { x, y, inside } = toLocal(event)
+      if (!inside) return
+
+      pointer.type = 'touch'
+      pointer.x = x
+      pointer.y = y
+      pointer.pending = true
+      pointer.pendingSince = performance.now()
+    }
+
+    const onPointerMove = (event) => {
+      if (!event.isPrimary) return
+
+      const { x, y, inside } = toLocal(event)
+
+      if (event.pointerType === 'touch') {
+        if (!pointer.pending && pointer.target === 0) return
+
+        pointer.x = x
+        pointer.y = y
+
+        if (!inside) {
+          pointer.pending = false
+          pointer.target = 0
+        }
+        return
+      }
+
+      // الماوس أو قلم يحوم فوق الشاشة
+      pointer.type = 'mouse'
+      pointer.x = x
+      pointer.y = y
+      pointer.target = inside ? 1 : 0
+    }
+
+    // رفع الإصبع بعد لمسة سريعة (tap): وميض خفيف ثم يخبو
+    const onPointerUp = (event) => {
+      if (event.pointerType !== 'touch') return
+
+      if (pointer.pending) {
+        pointer.strength = Math.max(pointer.strength, 0.7)
+      }
+
+      pointer.pending = false
+      pointer.target = 0
+    }
+
+    // المتصفح بدأ التمرير: يخبو الضوء بلا وميض
+    const onPointerCancel = (event) => {
+      if (event.pointerType !== 'touch') return
+
+      pointer.pending = false
+      pointer.target = 0
     }
 
     const onMouseLeave = () => {
-      mouse.active = false
+      if (pointer.type === 'mouse') pointer.target = 0
     }
 
     const onVisibilityChange = () => {
@@ -258,8 +364,13 @@ function NetworkBackground() {
     resizeCanvas()
     start()
 
-    // نستمع على window لأن الكانفاس غالباً خلف المحتوى ولا يستقبل الماوس
-    window.addEventListener('pointermove', onPointerMove)
+    // نستمع على window لأن الكانفاس خلف المحتوى ولا يستقبل الأحداث بنفسه
+    window.addEventListener('pointerdown', onPointerDown, { passive: true })
+    window.addEventListener('pointermove', onPointerMove, { passive: true })
+    window.addEventListener('pointerup', onPointerUp, { passive: true })
+    window.addEventListener('pointercancel', onPointerCancel, {
+      passive: true,
+    })
     document.addEventListener('mouseleave', onMouseLeave)
     document.addEventListener('visibilitychange', onVisibilityChange)
 
@@ -284,7 +395,10 @@ function NetworkBackground() {
 
     return () => {
       stop()
+      window.removeEventListener('pointerdown', onPointerDown)
       window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+      window.removeEventListener('pointercancel', onPointerCancel)
       document.removeEventListener('mouseleave', onMouseLeave)
       document.removeEventListener('visibilitychange', onVisibilityChange)
       window.removeEventListener('resize', resizeCanvas)
