@@ -86,7 +86,7 @@ function Home() {
               </a>
 
               <a
-                href="/cv.pdf"
+                href="/cvv.pdf"
                 target="_blank"
                 rel="noreferrer"
                 className="hero-button hero-button-secondary"
