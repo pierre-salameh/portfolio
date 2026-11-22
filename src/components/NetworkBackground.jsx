@@ -11,7 +11,7 @@ const CONFIG = {
   mouseRadius: 170,
   mouseLinkAlpha: 0.55,
   mousePush: 0.04,        
-  mouseGlow: 0.1,        
+  mouseGlow: 0,        
 
   // اللمس (الموبايل)
   touchRadius: 200,
