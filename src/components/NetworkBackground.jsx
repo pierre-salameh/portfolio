@@ -1,25 +1,24 @@
 import { useEffect, useRef } from 'react'
 
-// ───── إعدادات سهلة التعديل ─────
 const CONFIG = {
   minParticles: 35,
   maxParticles: 85,
-  areaPerParticle: 13000, // مساحة الشاشة لكل نقطة
-  linkDistance: 145,      // أقصى مسافة لرسم خط بين نقطتين
-  baseSpeed: 0.35,        // سرعة النقاط الهادئة
+  areaPerParticle: 13000, 
+  linkDistance: 145,      
+  baseSpeed: 0.35,        
 
   // الماوس (الكمبيوتر)
   mouseRadius: 170,
   mouseLinkAlpha: 0.55,
-  mousePush: 0.04,        // 0 = بدون دفع
-  mouseGlow: 0.1,         // 0 = بدون هالة
+  mousePush: 0.04,        
+  mouseGlow: 0.1,        
 
   // اللمس (الموبايل)
-  touchRadius: 150,
-  touchLinkAlpha: 0.65,
-  touchPush: 0.05,
-  touchGlow: 0.18,        // أقوى لأن الإصبع يغطي جزءاً من الضوء
-  touchDelay: 60,         // مللي ثانية قبل ظهور الضوء (يتجنب وميضاً عند بدء التمرير)
+  touchRadius: 200,
+  touchLinkAlpha: 0.9,
+  touchPush: 0.07,
+  touchGlow: 0.45,       
+  touchDelay: 60,         
 }
 
 function NetworkBackground() {
@@ -38,14 +37,13 @@ function NetworkBackground() {
     let running = false
     let inView = true
 
-    // حالة المؤشر (ماوس أو إصبع)
     const pointer = {
       x: 0,
       y: 0,
-      type: 'mouse',   // 'mouse' | 'touch'
-      target: 0,       // 1 = الضوء مطلوب، 0 = مخفي
-      strength: 0,     // قوة الضوء الحالية (تتغير بسلاسة)
-      pending: false,  // لمسة بدأت وننتظر مرور touchDelay
+      type: 'mouse',   
+      target: 0,       
+      strength: 0,     
+      pending: false,  
       pendingSince: 0,
     }
 
@@ -81,7 +79,6 @@ function NetworkBackground() {
     const draw = () => {
       context.clearRect(0, 0, width, height)
 
-      // بدء الضوء بعد تأخير قصير من اللمس
       if (
         pointer.pending &&
         performance.now() - pointer.pendingSince >= CONFIG.touchDelay
@@ -90,7 +87,6 @@ function NetworkBackground() {
         pointer.target = 1
       }
 
-      // تغيير قوة الضوء بسلاسة (ظهور أسرع، اختفاء أبطأ)
       const fade = pointer.target > pointer.strength ? 0.18 : 0.07
       pointer.strength += (pointer.target - pointer.strength) * fade
       if (pointer.target === 0 && pointer.strength < 0.005) {
@@ -111,7 +107,6 @@ function NetworkBackground() {
       const linkSq = CONFIG.linkDistance * CONFIG.linkDistance
       const useMouse = pointer.strength > 0.01 && !reduceMotion
 
-      // هالة حول المؤشر أو الإصبع
       if (useMouse && glowAlpha > 0) {
         const glow = context.createRadialGradient(
           pointer.x,
@@ -121,7 +116,11 @@ function NetworkBackground() {
           pointer.y,
           radius
         )
-        glow.addColorStop(0, `rgba(70, 140, 255, ${glowAlpha})`)
+        glow.addColorStop(
+          0,
+          `rgba(160, 205, 255, ${Math.min(glowAlpha * 1.6, 0.9)})`
+        )
+        glow.addColorStop(0.35, `rgba(70, 140, 255, ${glowAlpha})`)
         glow.addColorStop(1, 'rgba(70, 140, 255, 0)')
         context.fillStyle = glow
         context.fillRect(
@@ -136,7 +135,6 @@ function NetworkBackground() {
         const particle = particles[index]
 
         if (!reduceMotion) {
-          // دفع خفيف بعيداً عن المؤشر
           if (useMouse && push > 0) {
             const dx = particle.x - pointer.x
             const dy = particle.y - pointer.y
@@ -151,7 +149,6 @@ function NetworkBackground() {
             }
           }
 
-          // عودة تدريجية إلى السرعة الهادئة
           particle.vx += (particle.bvx - particle.vx) * 0.02
           particle.vy += (particle.bvy - particle.vy) * 0.02
 
@@ -179,7 +176,6 @@ function NetworkBackground() {
           }
         }
 
-        // النقطة
         context.beginPath()
         context.arc(
           particle.x,
@@ -191,7 +187,6 @@ function NetworkBackground() {
         context.fillStyle = 'rgba(90, 160, 255, 0.85)'
         context.fill()
 
-        // خط بين النقطة والمؤشر
         if (useMouse) {
           const dx = particle.x - pointer.x
           const dy = particle.y - pointer.y
@@ -204,12 +199,11 @@ function NetworkBackground() {
             context.moveTo(particle.x, particle.y)
             context.lineTo(pointer.x, pointer.y)
             context.strokeStyle = `rgba(120, 180, 255, ${alpha})`
-            context.lineWidth = 0.9
+            context.lineWidth = isTouch ? 1.4 : 0.9
             context.stroke()
           }
         }
 
-        // خطوط بين النقاط
         for (let i = index + 1; i < particles.length; i++) {
           const other = particles[i]
 
@@ -248,8 +242,6 @@ function NetworkBackground() {
       canvas.height = Math.round(height * ratio)
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
 
-      // على الموبايل يتغير الارتفاع فقط عند إخفاء شريط المتصفح:
-      // لا نعيد بناء النقاط حينها، فقط نمدّدها
       const widthChanged = Math.abs(width - previousWidth) > 1
 
       if (widthChanged || particles.length === 0) {
@@ -280,7 +272,6 @@ function NetworkBackground() {
       cancelAnimationFrame(animationFrame)
     }
 
-    // تحويل موضع الحدث إلى إحداثيات الكانفاس
     const toLocal = (event) => {
       const bounds = canvas.getBoundingClientRect()
       const x = event.clientX - bounds.left
@@ -293,7 +284,6 @@ function NetworkBackground() {
       }
     }
 
-    // ───── اللمس ─────
     const onPointerDown = (event) => {
       if (event.pointerType !== 'touch' || !event.isPrimary) return
 
@@ -325,14 +315,12 @@ function NetworkBackground() {
         return
       }
 
-      // الماوس أو قلم يحوم فوق الشاشة
       pointer.type = 'mouse'
       pointer.x = x
       pointer.y = y
       pointer.target = inside ? 1 : 0
     }
 
-    // رفع الإصبع بعد لمسة سريعة (tap): وميض خفيف ثم يخبو
     const onPointerUp = (event) => {
       if (event.pointerType !== 'touch') return
 
@@ -344,7 +332,6 @@ function NetworkBackground() {
       pointer.target = 0
     }
 
-    // المتصفح بدأ التمرير: يخبو الضوء بلا وميض
     const onPointerCancel = (event) => {
       if (event.pointerType !== 'touch') return
 
@@ -364,7 +351,6 @@ function NetworkBackground() {
     resizeCanvas()
     start()
 
-    // نستمع على window لأن الكانفاس خلف المحتوى ولا يستقبل الأحداث بنفسه
     window.addEventListener('pointerdown', onPointerDown, { passive: true })
     window.addEventListener('pointermove', onPointerMove, { passive: true })
     window.addEventListener('pointerup', onPointerUp, { passive: true })
@@ -382,7 +368,6 @@ function NetworkBackground() {
       window.addEventListener('resize', resizeCanvas)
     }
 
-    // توقف الرسم عندما يخرج الـ Hero من الشاشة
     let intersectionObserver = null
     if (typeof IntersectionObserver !== 'undefined') {
       intersectionObserver = new IntersectionObserver(([entry]) => {
